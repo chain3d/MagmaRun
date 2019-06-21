@@ -1,3 +1,1 @@
-include("spigot")
-
-findProject(":spigot")?.name = "${rootProject.name}-Spigot"
+rootProject.name = 'MagmaRun'
