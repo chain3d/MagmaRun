@@ -1,5 +1,7 @@
 package net.darkdevelopers.magmarun
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import net.darkdevelopers.darkbedrock.darkness.general.modules.Module
 import net.darkdevelopers.darkbedrock.darkness.general.modules.ModuleDescription
 import org.bukkit.Bukkit
@@ -29,16 +31,20 @@ class MagmaRun : Module {
 
     private fun spawnPlatform() {
 
-        val world = Bukkit.getWorlds()[0]
-        for (x in 0 until 50) {
-            for (z in 0 until 50) {
-                val block = Location(world, x.toDouble(), 100.0, z.toDouble()).block
+        GlobalScope.launch {
 
-                block.type = Material.WOOL
-                @Suppress("DEPRECATION")
-                block.data = Random.nextBits(4).toByte()
+            val world = Bukkit.getWorlds()[0]
+            for (x in 0 until 50) {
+                for (z in 0 until 50) {
+                    val block = Location(world, x.toDouble(), 100.0, z.toDouble()).block
 
+                    block.type = Material.WOOL
+                    @Suppress("DEPRECATION")
+                    block.data = Random.nextBits(4).toByte()
+
+                }
             }
+
         }
 
     }
