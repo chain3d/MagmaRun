@@ -4,7 +4,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import net.darkdevelopers.darkbedrock.darkness.general.modules.Module
 import net.darkdevelopers.darkbedrock.darkness.general.modules.ModuleDescription
-import org.bukkit.Bukkit
+import net.darkdevelopers.magmarun.functions.firstWorld
 import org.bukkit.Location
 import org.bukkit.Material
 import kotlin.random.Random
@@ -33,10 +33,9 @@ class MagmaRun : Module {
 
         GlobalScope.launch {
 
-            val world = Bukkit.getWorlds()[0]
             for (x in 0 until 50) {
                 for (z in 0 until 50) {
-                    val block = Location(world, x.toDouble(), 100.0, z.toDouble()).block
+                    val block = Location(firstWorld, x.toDouble(), 100.0, z.toDouble()).block
 
                     block.type = Material.WOOL
                     @Suppress("DEPRECATION")
