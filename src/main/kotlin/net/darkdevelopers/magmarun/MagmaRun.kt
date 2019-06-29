@@ -27,7 +27,7 @@ class MagmaRun : Module {
 
     }
 
-    fun spawnPlatform() {
+    private fun spawnPlatform() {
 
         val world = Bukkit.getWorlds()[0]
         for (x in 0 until 50) {
