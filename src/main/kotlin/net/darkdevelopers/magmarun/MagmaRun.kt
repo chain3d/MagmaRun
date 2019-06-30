@@ -6,12 +6,14 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.darkdevelopers.darkbedrock.darkness.general.modules.Module
 import net.darkdevelopers.darkbedrock.darkness.general.modules.ModuleDescription
+import net.darkdevelopers.darkbedrock.darkness.spigot.functions.schedule
 import net.darkdevelopers.magmarun.events.PlayerEvents
 import net.darkdevelopers.magmarun.functions.firstWorld
 import net.darkdevelopers.magmarun.functions.removeBlock
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.plugin.Plugin
 import kotlin.random.Random
 
 /**
@@ -49,7 +51,7 @@ class MagmaRun : Module {
         }
     }
 
-    private fun spawnPlatform() {
+    private fun spawnPlatform(plugin: Plugin = ServerCoreSpigotPlugin.javaPlugin) {
 
         GlobalScope.launch {
 
@@ -57,9 +59,11 @@ class MagmaRun : Module {
                 for (z in 0 until 50) {
                     val block = Location(firstWorld, x.toDouble(), 100.0, z.toDouble()).block
 
-                    block.type = Material.WOOL
-                    @Suppress("DEPRECATION")
-                    block.data = Random.nextBits(4).toByte()
+                    plugin.schedule {
+                        block.type = Material.WOOL
+                        @Suppress("DEPRECATION")
+                        block.data = Random.nextBits(4).toByte()
+                    }
 
                 }
             }
