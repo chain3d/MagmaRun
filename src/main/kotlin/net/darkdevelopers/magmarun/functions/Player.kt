@@ -8,7 +8,6 @@ import net.darkdevelopers.darkbedrock.darkness.spigot.functions.schedule
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.plugin.Plugin
-import java.util.concurrent.TimeUnit
 
 /*
  * Created on 30.06.2019 02:10.
@@ -21,7 +20,7 @@ fun Player.removeBlock(plugin: Plugin = ServerCoreSpigotPlugin.javaPlugin) {
     if (type == Material.AIR) return
 
     GlobalScope.launch {
-        delay(TimeUnit.SECONDS.toMillis(1)) //waited a second
+        delay(100)
         plugin.schedule {
             location.block.type = Material.AIR //removes the block
         }

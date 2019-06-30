@@ -44,7 +44,7 @@ class MagmaRun : Module {
     private fun startRemoveTask() {
         GlobalScope.launch {
             while (ServerCoreSpigotPlugin.javaPlugin.isEnabled) {
-                delay(500) //wait 5 seconds
+                delay(50) //wait 5 seconds
                 for (player in Bukkit.getOnlinePlayers())
                     player.removeBlock()
             }
