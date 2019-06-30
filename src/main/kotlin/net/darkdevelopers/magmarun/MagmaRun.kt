@@ -2,11 +2,14 @@ package net.darkdevelopers.magmarun
 
 import de.astride.minecraft.servercore.spigot.ServerCoreSpigotPlugin
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.darkdevelopers.darkbedrock.darkness.general.modules.Module
 import net.darkdevelopers.darkbedrock.darkness.general.modules.ModuleDescription
 import net.darkdevelopers.magmarun.events.PlayerEvents
 import net.darkdevelopers.magmarun.functions.firstWorld
+import net.darkdevelopers.magmarun.functions.removeBlock
+import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import kotlin.random.Random
@@ -28,11 +31,22 @@ class MagmaRun : Module {
 
         spawnPlatform()
         PlayerEvents.setup(ServerCoreSpigotPlugin.javaPlugin)
+        startRemoveTask()
 
     }
 
     override fun stop() {
         PlayerEvents.reset()
+    }
+
+    private fun startRemoveTask() {
+        GlobalScope.launch {
+            while (ServerCoreSpigotPlugin.javaPlugin.isEnabled) {
+                delay(500) //wait 5 seconds
+                for (player in Bukkit.getOnlinePlayers())
+                    player.removeBlock()
+            }
+        }
     }
 
     private fun spawnPlatform() {
